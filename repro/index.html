@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper Repro Agent</title>
+<meta name="description" content="Drop a research paper PDF and watch an agent read it, write and run the code, and check the paper's number.">
+<style id="critical">/* shown even if style.css is slow or blocked */
+body{margin:0;background:#F8F7F4;color:#15151C;font-family:Inter,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.tb{display:flex;align-items:center;gap:8px;height:64px;padding:0 18px;background:#F8F7F4;border-bottom:1px solid #E7E5DF}
+.tb a{color:inherit;text-decoration:none}.tbnav{display:flex;gap:14px;align-items:center}.tbact{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tbsheet,.suitemenu,.helpmodal[hidden]{display:none}
+</style>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css?v=20261029a">
+<script src="vendor/pdf.min.js"></script>
+<script src="theme.js?v=20261029a"></script>
+</head>
+<body>
+<header class="tb" id="tb">
+  <a class="brand" href="index.html#start" id="homeBtn" aria-label="Home"><span class="logo" aria-hidden="true">R</span><b>Paper Repro Agent</b></a>
+  <nav class="tbnav" aria-label="Main">
+    <a href="index.html#start" data-pane="start">Reproduce</a>
+    <a href="index.html#papers" data-pane="papers">Papers</a>
+    <a href="index.html#runs" data-pane="runs">Runs</a>
+    <a href="bench.html" data-page="bench">Benchmark</a>
+    <a href="https://bryan273.github.io/repro-suite/explainer/" target="_blank" rel="noopener">Paper Explainer</a>
+    <div class="suite"><button class="suitebtn" id="suiteBtn" type="button" aria-expanded="false" aria-controls="suiteMenu">Paper Repro Suite <span aria-hidden="true">&#9662;</span></button>
+      <div class="suitemenu" id="suiteMenu" hidden>
+        <a href="https://bryan273.github.io/repro-suite/lite/" target="_blank" rel="noopener"><b>Repro Lite <i>&#8599;</i></b><span>Check one claim in your browser</span></a>
+        <a href="https://bryan273.github.io/repro-suite/reading/" target="_blank" rel="noopener"><b>Reading Companion <i>&#8599;</i></b><span>Read arXiv papers with cited answers</span></a>
+        <a href="https://bryan273.github.io/repro-suite/indexboard/b/5dhum9j5h0" target="_blank" rel="noopener"><b>IndexBoard <i>&#8599;</i></b><span>Honest leaderboards with ties</span></a>
+        <a href="https://bryan273.github.io/repro-suite/desk/" target="_blank" rel="noopener"><b>Repro Desk <i>&#8599;</i></b><span>Ask for a human-checked reproduction</span></a>
+        <a href="https://bryan273.github.io/repro-suite/hub/" target="_blank" rel="noopener"><b>All apps <i>&#8599;</i></b><span>The Repro Suite home</span></a>
+      </div></div>
+  </nav>
+  <div class="tbact" id="themeSlot"><button class="ghost" id="helpBtn" type="button" aria-haspopup="dialog">? <span class="hlab">How to use</span></button><button class="ghost" id="langBtn" type="button" aria-label="Language">中文</button><div class="status" id="status" title=""><span class="dot"></span><span id="statusText">connecting</span></div><button class="ghost icon" id="menuBtn" type="button" aria-label="Menu" aria-controls="tbsheet" aria-expanded="false">&#9776;</button></div>
+</header>
+<div class="helpmodal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+ <div class="helpcard">
+  <button class="helpx" id="helpClose" type="button" aria-label="Close">&times;</button>
+  <h2 id="helpTitle">How to use this site</h2>
+  <p class="muted">Two things you can do with a research paper. Pick the one you need.</p>
+  <div class="helpcols">
+   <section>
+    <h3>Check a paper: does the result hold?</h3>
+    <ol>
+     <li><b>Pick a paper.</b> Upload a PDF on Reproduce, or choose one under Papers.</li>
+     <li><b>Press Start a reproduction.</b> The agent reads the paper, writes code and runs it. It takes about 5 to 15 minutes and you can watch it live.</li>
+     <li><b>Read the verdict.</b> Reproduced, Not reproduced or Inconclusive, with the numbers next to what the paper reports.</li>
+    </ol>
+    <p class="small muted">If the top bar says Replay mode, no live runner is connected. You can still open any recorded run under Runs.</p>
+   </section>
+   <section>
+    <h3>Learn a paper: watch a short video</h3>
+    <ol>
+     <li><b>Open Paper Explainer.</b> Use the button below or the link in the top bar.</li>
+     <li><b>Paste a paper link.</b> An arXiv link, a PDF link or a DOI works.</li>
+     <li><b>Wait 3 to 5 minutes.</b> You get a narrated video in English and Chinese, with every quote and number checked.</li>
+    </ol>
+    <a class="primary" href="https://bryan273.github.io/repro-suite/explainer/" target="_blank" rel="noopener">Open Paper Explainer</a>
+   </section>
+  </div>
+  <p class="small muted">Stuck? Open the Benchmark to see how the agent scored on real papers, or use the Paper Repro Suite menu for the other apps.</p>
+ </div>
+</div>
+<div class="tbsheet" id="tbsheet">
+  <div class="navh">Reproduce</div>
+  <a href="index.html#start" data-pane="start">Reproduce a paper</a>
+  <a href="index.html#papers" data-pane="papers">Browse papers</a>
+  <a href="index.html#runs" data-pane="runs">Completed runs</a>
+  <a href="bench.html" data-page="bench">Benchmark</a>
+  <div class="navh">Learn</div>
+  <a href="https://bryan273.github.io/repro-suite/explainer/" target="_blank" rel="noopener">Paper Explainer<span class="ext">&#8599;</span></a>
+  <div class="navh">Paper Repro Suite</div>
+  <a href="https://bryan273.github.io/repro-suite/lite/" target="_blank" rel="noopener">Repro Lite<span class="ext">&#8599;</span></a>
+  <a href="https://bryan273.github.io/repro-suite/reading/" target="_blank" rel="noopener">Reading Companion<span class="ext">&#8599;</span></a>
+  <a href="https://bryan273.github.io/repro-suite/indexboard/b/5dhum9j5h0" target="_blank" rel="noopener">IndexBoard<span class="ext">&#8599;</span></a>
+  <a href="https://bryan273.github.io/repro-suite/desk/" target="_blank" rel="noopener">Repro Desk<span class="ext">&#8599;</span></a>
+  <a href="https://bryan273.github.io/repro-suite/hub/" target="_blank" rel="noopener">All apps<span class="ext">&#8599;</span></a>
+</div>
+
+<main>
+  <!-- ================= HOME ================= -->
+  <section id="home" class="home">
+   <div class="pane" data-pane="start">
+    <div class="herogrid">
+     <div class="hero">
+      <span class="eyebrow">Paper Repro Agent</span>
+      <h1>Drop a paper. Watch an agent <span class="gt">reproduce it.</span></h1>
+      <p>It reads the PDF, decides what to check, writes and runs the code in a sandbox, then re-runs everything from scratch before it gives a verdict. You see what it reads, what it runs, how long it takes and what it costs.</p>
+      <div class="cta"><a class="primary" data-scroll="#uploader">Start a reproduction</a><a class="ghost" data-scroll="#samples">Watch a recorded run</a></div>
+     </div>
+     <div class="stage" id="stage" aria-hidden="true">
+      <div class="glow"></div>
+      <div class="stack" id="stack">
+       <div class="sheet s1"><span class="tag">1 · Paper</span><div class="ln w9"></div><div class="ln w7"></div><div class="ln hl">Table 3 · AUC 0.85</div><div class="ln w9"></div><div class="ln w5"></div><div class="ln w7"></div></div>
+       <div class="sheet s2"><span class="tag">2 · Code</span><div class="code"><span><span class="k">$</span> python run.py</span><span>fitting 100 trees</span><span>AUC = 0.849</span><span class="g">&#10003; re-run from scratch</span><span class="g">&#10003; no copied numbers</span></div></div>
+       <div class="sheet s3"><span class="tag">3 · Verdict</span><div class="big">0.849</div><small>reported 0.85</small><span class="okp">&#10003; Reproduced</span><div class="band"><i></i><b></b></div><small>acceptance band</small></div>
+      </div>
+     </div>
+    </div>
+
+    <div class="startguide card" id="startguide">
+     <div class="sgh"><b>New here? Start in 3 steps</b><span class="muted">No account needed.</span></div>
+     <ol class="sgs">
+      <li><span class="n">1</span><div><b>Watch a sample first</b><p>Pick one recorded run below. It is free and instant, and nothing runs on your side.</p><a class="primary" data-scroll="#samples">See the samples</a></div></li>
+      <li><span class="n">2</span><div><b>Read the verdict</b><p>Reproduced, Not reproduced or Inconclusive, with the paper's number next to what the agent measured.</p></div></li>
+      <li><span class="n">3</span><div><b>Then try your own paper</b><p>Drop a PDF or paste an arXiv link. Live runs need a connected runner. If the dot in the top bar is orange, use the samples.</p><a class="ghost" data-scroll="#uploader">Try my paper</a></div></li>
+     </ol>
+     <p class="small muted sgfoot">Want a short video of a paper instead? <a href="https://bryan273.github.io/repro-suite/explainer/" target="_blank" rel="noopener">Open Paper Explainer</a></p>
+    </div>
+
+    <div class="uploader card" id="uploader">
+      <label class="drop" id="drop" tabindex="0">
+        <input type="file" id="fileInput" accept="application/pdf" hidden>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 6h14l10 10v24a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M28 6v10h10" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M25 36V22m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <b>Drop a paper PDF here</b>
+        <span>or click to choose a file</span>
+        <span class="or-link">or <button type="button" class="linkish" id="useId">paste an arXiv ID or URL</button></span>
+      </label>
+
+      <div class="picked" id="picked" hidden>
+        <div class="thumbwrap"><canvas id="pickedThumb"></canvas><div class="upbar"><i id="upbar"></i></div></div>
+        <div class="pickedinfo">
+          <div class="muted small mono" id="pickedFile"></div>
+          <h2 id="pickedTitle">Reading PDF</h2>
+          <div class="muted small" id="pickedMeta"></div>
+          <div id="pickedStatus"></div>
+          <div id="fitBox"></div>
+          <div id="pickedNote" class="note"></div>
+          <div class="fields">
+            <label>Paper <span class="muted">arXiv ID or PDF URL</span><input id="paperId" placeholder="e.g. 1607.01759"></label>
+            <label>Code repository <span class="muted">optional</span><input id="repoIn" placeholder="https://github.com/..."></label>
+            <label>Which result should it check? <span class="muted">optional</span><input id="hintIn" placeholder="e.g. Table 1, AG News accuracy"></label>
+            <label id="keyLabel" hidden>Access key <span class="muted">needed to start a run on this runner</span><input id="keyIn" type="password" autocomplete="off" placeholder="ask the runner's owner"></label>
+          </div>
+          <div class="actions" id="pickedActions"></div>
+          <p class="muted small" id="formMsg"></p>
+          <div class="kitbox" id="kitBox"></div>
+        </div>
+        <button class="x" id="clearPick" type="button" aria-label="Choose another paper">&times;</button>
+      </div>
+    </div>
+
+
+    <a class="facts" href="bench.html" aria-label="Benchmark at a glance">
+      <span><b>6</b>models compared</span>
+      <span><b>32</b>papers</span>
+      <span><b>281</b>recorded runs</span>
+      <span><b>89.2</b>best Repro Index</span>
+      <span><b>±7</b>index points run-to-run noise</span>
+      <span class="go">See the benchmark &rarr;</span>
+    </a>
+
+    <h2 class="sec">How a paper becomes a verdict</h2>
+    <p class="muted sec-sub">Six steps, each one checked. Select a step to see what happens there.</p>
+    <div class="pipe2" id="pipe">
+      <div class="pleft">
+       <div class="pstage" aria-hidden="true">
+        <div class="pscene" data-i="0"><div class="pg"><b class="ptit">Isolation Forest</b><u></u><u class="s"></u><u></u><div class="hlrow">Table 3 · iForest AUC 0.85</div><u class="s"></u><u></u><u class="s"></u></div><div class="scan"></div><span class="cap">Reads the paper page by page</span></div>
+        <div class="pscene" data-i="1"><div class="ccard"><span class="k">CLAIM CONTRACT</span><div class="row"><span>Metric</span><b>AUC, higher is better</b></div><div class="row"><span>Paper value</span><b class="n">0.85</b></div><div class="row"><span>Tolerance</span><b>±0.085</b></div><div class="band2"><i></i></div><div class="lock">Fixed before any run</div></div><span class="cap">Fixes the target and the tolerance first</span></div>
+        <div class="pscene" data-i="2"><div class="ed"><div class="bar"><i></i><i></i><i></i><span>run.py</span></div><div class="lines"><p><span class="a">def</span> experiment(X):</p><p>    forest = IsolationForest(100)</p><p>    forest.fit(X)</p><p>    return auc(forest, X)</p><p class="dim"># written without seeing 0.85</p></div></div><span class="cap">Writes the code without seeing the paper's value</span></div>
+        <div class="pscene" data-i="3"><div class="term"><p>$ python run.py</p><p>loading Ionosphere, 351 rows</p><p>fitting 100 trees</p><div class="pb"><i></i></div><p class="g">AUC = 0.849</p></div><span class="cap">Runs in a sandbox until one command makes the number</span></div>
+        <div class="pscene" data-i="4"><div class="rerun"><div class="spin"></div><ul><li>Results deleted</li><li>Everything re-run from scratch</li><li>Searched for copied numbers: none</li></ul></div><span class="cap">The verdict comes from this second run</span></div>
+        <div class="pscene" data-i="5"><div class="verd"><div class="vn">0.849</div><small>paper 0.85 · tolerance ±0.085</small><div class="band3"><i></i><b></b></div><div class="stamp">Reproduced</div></div><span class="cap">Reproduced, partly reproduced or not reproduced</span></div>
+       </div>
+       <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <ol class="pipesteps" id="pipeSteps">
+        <li data-i="0"><button type="button">Read the paper</button><span>The reader opens the PDF page by page and marks the result tables and the method sections.</span></li>
+        <li data-i="1"><button type="button">Fix the target</button><span>It writes a claim contract: the number to check, where it is, a tolerance fixed before any run, and every detail the paper leaves open.</span></li>
+        <li data-i="2"><button type="button">Write the code</button><span>The router checks what the authors released and the planner lays out the files, one config and a smoke test. The implementer writes the code without seeing the paper's value.</span></li>
+        <li data-i="3"><button type="button">Run it</button><span>The code runs in a sandbox until one command re-creates the number. A repair manager steps in when it gets stuck.</span></li>
+        <li data-i="4"><button type="button">Clean re-run</button><span>The verifier deletes the results, re-runs everything from scratch and searches the code for copied numbers.</span></li>
+        <li data-i="5"><button type="button">Verdict</button><span>Reproduced, partially reproduced or not reproduced, decided by the clean re-run against the tolerance fixed in the claim contract.</span></li>
+      </ol>
+    </div>
+
+    <h2 class="sec">Three ways to use it</h2>
+    <div class="ways">
+      <div class="way"><span class="pill on">Online · free · instant</span><b>Watch a recorded run</b><span>Pick a sample paper below. You see the agent read, code, re-run and give its verdict, step by step. Nothing runs on your side.</span></div>
+      <div class="way"><span class="pill">Local · your machine</span><b>Run it on your own agent</b><span>Pick any paper and get a kit link. Paste it into Claude Code, Codex or another agent; it runs the experiment on your computer and posts progress and the verdict back to this page.</span></div>
+      <div class="way"><span class="pill">Lab runner · access key</span><b>Our full pipeline</b><span>All five steps on our lab machine. A run needs an access key because it spends model tokens and compute. When the runner is offline, this page shows recorded runs.</span></div>
+    </div>
+
+    <h2 class="sec" id="samples">Or try a sample paper</h2>
+    <p class="muted small sec-sub">One paper for each situation the agent handles: the authors' code works, the code exists but is broken, or there is no code at all.</p>
+    <div class="samples" id="samples"></div>
+
+
+    <a class="appcard feature" href="https://bryan273.github.io/repro-suite/explainer/" target="_blank" rel="noopener"><span class="pill on">Sister product</span><b>Paper Explainer</b><span>Type an arXiv id and get a short explainer video of the paper, narrated in English and Chinese. Every quote and number in the video is checked against the paper text.</span><span class="go">Watch an explainer &rarr;</span></a>
+   </div>
+
+   <div class="pane" data-pane="papers" hidden>
+    <div class="hero small"><span class="eyebrow">Library</span><h1>Browse papers</h1><p>Papers grouped by research group, with the verdict of every paper already reproduced. Pick one to start a reproduction.</p></div>
+    <p class="muted small sec-sub">Papers are grouped by research group, each paper once with all its authors. Pick a group, then an author from the A to Z list. Papers already reproduced show their verdict.</p>
+    <div class="card browsebox" id="browse">
+      <label>Research group<select id="grpSel"></select></label>
+      <label>Author (A to Z)<select id="authSel"></select></label>
+      <label>Filter by title or keyword<input id="titleFilter" type="search" autocomplete="off"></label>
+      <label>Reproduction status<select id="statusSel"><option value="">All papers</option><option value="done">Already reproduced</option><option value="todo">Not reproduced yet</option></select></label>
+      <label>Difficulty<select id="tierSel"><option value="">Any difficulty</option><option value="light">Light (about 30 min or less)</option><option value="medium">Medium (up to 90 min)</option><option value="heavy">Heavy (GPU or longer)</option><option value="none">Not estimated yet</option></select></label>
+    </div>
+    <p class="muted small" id="browseMsg"></p>
+    <div class="results" id="browseResults"></div>
+
+    <div id="arxivSearch" hidden>
+    <h2 class="sec">Find a paper on arXiv</h2>
+    <p class="muted small sec-sub">Search by author (name in Latin letters, e.g. Yujiu Yang) or by title words. Papers already reproduced on this runner show their verdict; select it to open that run.</p>
+    <form class="card searchbox" id="searchForm" role="search">
+      <div class="seg" id="searchMode" role="group" aria-label="Search by"><button type="button" data-m="author" class="on">Author</button><button type="button" data-m="keywords">Title or keywords</button></div>
+      <input id="searchIn" type="search" placeholder="e.g. Yujiu Yang" aria-label="Search arXiv" autocomplete="off">
+      <button class="primary" type="submit">Search</button>
+    </form>
+    <p class="muted small" id="searchMsg"></p>
+    <div class="results" id="results"></div>
+    </div>
+
+   </div>
+
+   <div class="pane" data-pane="runs" hidden>
+    <div class="hero small"><span class="eyebrow">Results</span><h1>Completed runs</h1><p>Every recorded run, newest first. Open one to replay what the agent read, ran and decided.</p></div>
+    <div id="agentRunsSec" hidden>
+      <h2 class="sec">Runs from users' own agents</h2>
+      <div class="runs" id="agentRuns"><p class="muted small">No runs from users' agents yet.</p></div>
+      <button class="ghost" id="historyBtn" type="button">See the full history, day by day</button>
+    </div>
+
+    <h2 class="sec">Recent runs</h2>
+    <div class="runs" id="runs"><p class="muted small">No runs yet.</p></div>
+    <button class="ghost" id="allRunsBtn" type="button" hidden></button>
+   </div>
+  </section>
+
+  <!-- ================= A RUN FROM A USER'S AGENT ================= -->
+  <section id="jobView" class="run" hidden>
+    <button class="ghost" id="jobBack" type="button">&larr; Back to the papers</button>
+    <div id="jobBody"></div>
+  </section>
+
+  <!-- ================= RUN ================= -->
+  <section id="run" class="run" hidden>
+    <div class="runhead">
+      <div class="rh-left">
+        <div class="muted small mono" id="rvId"></div>
+        <h1 id="rvTitle">Loading</h1>
+        <div class="badges" id="rvBadges"></div>
+      </div>
+      <div class="runactions">
+        <button class="ghost danger" id="stopBtn" type="button" hidden>Stop run</button>
+        <button class="ghost" id="reportBtn" type="button" hidden>Download report</button>
+      </div>
+      <div class="replayctl" id="replayCtl" hidden>
+        <button class="ghost" id="playBtn" type="button" aria-label="Pause">&#10074;&#10074;</button>
+        <div class="seg" id="speedSeg" role="group" aria-label="Replay speed"><button data-s="1">1&times;</button><button data-s="20">20&times;</button><button data-s="100">100&times;</button><button data-s="0">jump to end</button></div>
+      </div>
+    </div>
+
+    <ol class="stepper" id="stepper"></ol>
+
+    <div class="summary">
+      <section class="card" id="objCard" aria-label="Reproduction target">
+        <h2 class="cardh">Reproduction target</h2>
+        <div id="objBody"><p class="muted small">Defined after the paper has been analysed.</p></div>
+      </section>
+      <section class="card" id="resCard" aria-label="Result">
+        <h2 class="cardh">Result</h2>
+        <div id="resBody"><p class="muted small">Pending.</p></div>
+      </section>
+      <section class="card" id="cmpCard" aria-label="Paper and reproduction compared">
+        <h2 class="cardh">Paper and reproduction</h2>
+        <div id="cmpBody"><p class="muted small">Pending.</p></div>
+      </section>
+      <section class="card" id="effCard" aria-label="Time and cost">
+        <h2 class="cardh">Time and cost</h2>
+        <div class="metrics" id="metrics"></div>
+        <div id="stageBar"></div>
+      </section>
+    </div>
+
+    <div class="detailsbar">
+      <button class="ghost" id="detailsBtn" type="button" aria-expanded="true" aria-controls="details">Hide process details</button>
+      <span class="muted small">Annotated paper, execution timeline, agent log and verification audit</span>
+    </div>
+
+    <div id="details">
+      <section class="overview card" id="overview" aria-label="Process summary">
+        <div class="ov-grid">
+          <div><h2 class="cardh">Process summary</h2><dl class="kv wide" id="story"><dt>Status</dt><dd class="muted">Filled in as the run progresses.</dd></dl></div>
+          <div><h2 class="cardh">Time allocation</h2><div id="timeSplit"></div></div>
+        </div>
+        <div class="ov-map"><div class="maphead"><h2 class="cardh">Execution timeline</h2><span class="muted small">Scroll horizontally. Select a bar to open that step in the log.</span></div><div id="runMap"></div></div>
+      </section>
+
+      <div class="workspace">
+        <section class="paper card" aria-label="The paper">
+          <div class="phead">
+            <div><h2 class="cardh">Annotated paper</h2><div class="readchip" id="readChip">Waiting for the paper</div></div>
+            <div class="legend" id="hlLegend">
+              <button type="button" class="lg on" data-k="t"><i class="k-t"></i>target result</button>
+              <button type="button" class="lg on" data-k="r"><i class="k-r"></i>requirements</button>
+              <button type="button" class="lg on" data-k="a"><i class="k-a"></i>unspecified details</button>
+            </div>
+          </div>
+          <div class="pages" id="pages"><p class="muted small pad">The PDF appears here.</p></div>
+        </section>
+
+        <section class="timeline card" aria-label="Agent log">
+          <div class="tlhead">
+            <h2 class="cardh">Agent log</h2>
+            <div class="tlctl">
+              <div class="seg small" id="tlFilter" role="group" aria-label="Filter"><button data-f="key" class="on">key events</button><button data-f="all">all events</button></div>
+              <label class="toggle small"><input type="checkbox" id="showThinking"> model reasoning</label>
+            </div>
+          </div>
+          <div id="timeline"></div>
+        </section>
+      </div>
+
+      <div class="panels">
+        <section class="card" id="verdictCard" hidden></section>
+        <section class="card" id="contractCard" hidden></section>
+        <section class="card" id="routeCard" hidden></section>
+        <section class="card" id="ledgerCard" hidden></section>
+        <section class="card" id="costCard" hidden></section>
+        <section class="card" id="filesCard" hidden></section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog id="fileDlg"><div class="dlghead"><b id="fileDlgName"></b><button id="fileDlgClose" aria-label="Close">&times;</button></div><pre id="fileDlgBody"></pre></dialog>
+<script src="i18n.js?v=20261029a"></script>
+<script src="app.js?v=20261029a"></script>
+<script src="fit.js?v=20261029a"></script>
+<script src="fitbox.js?v=20261029a"></script>
+<script src="kit.js?v=20261029a"></script>
+<script src="jobs.js?v=20261029a"></script>
+<script src="nav.js?v=20261029a"></script>
+</body>
+</html>

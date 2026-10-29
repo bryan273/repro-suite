@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><title>Repro Suite</title>
+<script>
+// GitHub Pages has one 404 page for the whole site: send a deep link such as /repro-suite/explainer/admin back to that app, which restores the path
+var apps=['explainer','lite','reading','desk','indexboard','hub'],p=location.pathname.split('/').filter(Boolean),i=apps.indexOf(p[1]);
+if(p[0]==='repro-suite'&&i>-1){try{sessionStorage.setItem('spa-redirect','/repro-suite/'+apps[i]+'/'+p.slice(2).join('/')+location.search+location.hash)}catch(e){}location.replace('/repro-suite/'+apps[i]+'/')}
+else location.replace('/repro-suite/hub/');
+</script>
