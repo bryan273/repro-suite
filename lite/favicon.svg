@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b4bff"/><stop offset="1" stop-color="#8a5cff"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#g)"/><text x="32" y="44" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="36" fill="#fff">L</text></svg>
+version https://git-lfs.github.com/spec/v1
+oid sha256:109b0178d3b9359aa1a3f91e9cd19a782e8d3da58dfae714c2329a6be4b81aa4
+size 415
