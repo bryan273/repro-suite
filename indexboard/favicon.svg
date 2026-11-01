@@ -1,3 +1,1 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:463134fa7c251395859830577628e0e9f3894e6aa56ba64b56ce337734eeed88
-size 415
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b4bff"/><stop offset="1" stop-color="#8a5cff"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#g)"/><text x="32" y="44" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="36" fill="#fff">I</text></svg>
