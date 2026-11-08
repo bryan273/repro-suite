@@ -1,5 +1,17 @@
 [
   {
+    "v": "1.13",
+    "at": "2026-11-09T16:00:00Z",
+    "title": "Plans with monthly limits, Premium, invite reward 3 videos",
+    "notes": [
+      "Plus is 50 videos a month, Pro 120, and a new Premium plan has 250 (299.000đ / ¥109 / Rp259.000)",
+      "Interactive video is counted per month: free 2, Plus 10, Pro 30, Premium 80; the switch, the make form and the home page show how many are left",
+      "Interactive mode is chosen per video, so watching a shared or old video never uses one by surprise",
+      "In-depth answers per video: free 3, Plus 10, Pro 20, Premium 30",
+      "Inviting a friend now gives 3 videos; an approved student or teacher gets the Plus month with its 50 videos"
+    ]
+  },
+  {
     "v": "1.12",
     "at": "2026-11-09T12:30:00Z",
     "title": "New admin console, usernames, account switcher, personal home",
