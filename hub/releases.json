@@ -1,5 +1,19 @@
 [
   {
+    "v": "1.10",
+    "at": "2026-11-09T05:30:00Z",
+    "title": "Email confirmation and reset, everything in four languages, study pack",
+    "notes": [
+      "Sign-up confirmation by email and Forgot password by email, built for both Chinese and global mailboxes (Aliyun DirectMail and Resend). Switches on when the mail keys are added; until then sign-up works as before",
+      "Reading Companion now speaks Vietnamese and Indonesian, and the agent answers in the chosen language",
+      "One language for every Paperlit app: pick it once and it follows you. Dashboard, pricing, payment and feedback texts are now in Vietnamese and Indonesian",
+      "Study pack for Plus and Pro: notes of every part and flashcards (Anki CSV) from a video",
+      "Admin: orders show the amount in the member's own money and have Mark paid and Cancel buttons",
+      "The static Check the result pages use the Paperlit brand and the same three product names",
+      "Fixes: a sign-in race that could sign a member out right after confirming, 1 free video wording, the how-to button no longer covers the page on phones"
+    ]
+  },
+  {
     "v": "1.9",
     "at": "2026-11-09T03:30:00Z",
     "title": "Interactive quiz: ready before you play, history, final score",
