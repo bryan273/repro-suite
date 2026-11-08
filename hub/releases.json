@@ -1,0 +1,101 @@
+[
+  {
+    "v": "1.9",
+    "at": "2026-11-09T03:30:00Z",
+    "title": "Interactive quiz: ready before you play, history, final score",
+    "notes": [
+      "All questions of a video are written in one go as soon as interactive mode is on, and saved, so each question appears instantly",
+      "Explain this more now shows the explanation inside the video, not in another tab",
+      "New Quiz tab: every answer you gave with a score, review of each question, reset to answer again",
+      "Final quiz: generate a test on the whole video after watching, get a score and keep the history to review",
+      "Admin: suite version history with notes for every release, per-app change list, income and cost, audience, chart filters and paging",
+      "Plus is 99 videos and Pro is 200 videos, with a Custom box that opens Contact us"
+    ]
+  },
+  {
+    "v": "1.8",
+    "at": "2026-11-09T02:30:00Z",
+    "title": "Any source, local prices, money and audience in admin",
+    "notes": [
+      "Make form: choose Link, Paste text or Upload file. Any web page, pasted text and .txt or .md files work, not only papers",
+      "Language now sits with length, tone and voice, and the settings are open from the start. The EN + Chinese option is gone",
+      "Prices in dong for Vietnam and rupiah for Indonesia, no exchange rate. Plus 99 videos, Pro 200 videos, Custom plan with Contact us",
+      "Sign-up asks for country and language (required), where you heard about us and your role (optional)",
+      "Admin: income, cost and profit with trends, who the members are by country, version history, chart filters and paging",
+      "Navbar shortened and the menu is now called Apps. Plain footer without the team and partner lines. Credit history and password always visible"
+    ]
+  },
+  {
+    "v": "1.7",
+    "at": "2026-11-09T00:20:00Z",
+    "title": "Quiz inside the video, share link, new Plus and Pro, proof for students and teachers",
+    "notes": [
+      "Interactive questions now appear inside the video, so they also work in full screen. Interactive mode can be chosen when making a video or later",
+      "Share this video: one link that opens the video and its questions",
+      "Plus and Pro redesigned. Pro (59 yuan) gets 10 minute videos, unlimited careful answers and a year of storage. Pro card has its own colour and the buttons line up",
+      "Students and teachers get one free month of Plus after sending a proof, reviewed in the admin page",
+      "Invite a friend and get 10 free videos when they sign up",
+      "A video you close the page on keeps rendering and comes back when you return. Member page and dashboard open at once from the last visit",
+      "Wording: Fast and Deep became Quick and Thorough, background became general knowledge, Tour became How to use"
+    ]
+  },
+  {
+    "v": "1.6",
+    "at": "2026-11-08T22:00:00Z",
+    "title": "Reopen any video, opt-in interactive mode",
+    "notes": [
+      "A video made in Vietnamese or Indonesian opens again from the dashboard and the recent list",
+      "Interactive mode is off until you choose it, with a short introduction the first time",
+      "Student trial first version"
+    ]
+  },
+  {
+    "v": "1.5",
+    "at": "2026-11-08T18:00:00Z",
+    "title": "Paperlit brand, one navbar, plans you can buy",
+    "notes": [
+      "One name and one top bar on every app, always leading to the landing page",
+      "Landing page in English, Chinese, Vietnamese and Indonesian",
+      "Plans bought through the order flow, confirmed in admin. Vietnamese users pay by Techcombank or BIDV VietQR",
+      "Dashboard and Settings in the profile menu, with plan due date and days left",
+      "Guided how-to, a section showing everything you can do, 90 days kept for Plus and a year for Pro"
+    ]
+  },
+  {
+    "v": "1.4",
+    "at": "2026-11-08T14:00:00Z",
+    "title": "Vietnamese and Indonesian videos, real figures, Thorough answers",
+    "notes": [
+      "Videos in Vietnamese and Indonesian with matching voices",
+      "Figures and charts cropped from the paper appear in the video",
+      "Ask can use a stronger model for hard questions",
+      "Language slide bar and brighter video themes"
+    ]
+  },
+  {
+    "v": "1.3",
+    "at": "2026-11-08T10:00:00Z",
+    "title": "One-row navbar, settings, route chapters",
+    "notes": [
+      "Navbar in one row, settings dialog, chapter map under the player",
+      "Three plan cards"
+    ]
+  },
+  {
+    "v": "1.2",
+    "at": "2026-11-07T18:00:00Z",
+    "title": "PDF upload and the Ask tab",
+    "notes": [
+      "Upload your own PDF, ask questions about the paper with page references",
+      "One login for every app"
+    ]
+  },
+  {
+    "v": "1.1",
+    "at": "2026-10-29T12:00:00Z",
+    "title": "First public version",
+    "notes": [
+      "Paper to video in English and Chinese, Check the result agent, Quick check, Boards"
+    ]
+  }
+]
