@@ -1,5 +1,21 @@
 [
   {
+    "v": "1.12",
+    "at": "2026-11-09T12:30:00Z",
+    "title": "New admin console, usernames, account switcher, personal home",
+    "notes": [
+      "Admin is now eight tabs, grouped by what you decide: Overview, Revenue, Members, Audience, Videos and usage, Infrastructure, Releases, Feedback",
+      "Big charts with a period filter (today, 7, 30, 90, 180 days or your own dates), daily, weekly or monthly grouping and a hover read-out; every table has filters, search and paging",
+      "Infrastructure: space left in video storage, database, file storage and video traffic, the model gateway (RKAPI) balance, stuck jobs and the last backup, with warning colours",
+      "Audience: visitors, members chosen country, country from the connection, language, where they heard about us and who they are, as bar charts",
+      "Releases: suite versions with bullet points and times, plus every merged change per app with its own bullets",
+      "Sign in with your email or a username; sign-up asks for a username; Settings changes it; accounts saved on a device can be switched in the profile menu, and another account can be added without logging out",
+      "A member's home is now their own page: username, plan with due date and days left, videos you can make now (free plus credits), their videos with state, progress, invite and the student month. The introduction sections are for visitors only",
+      "A student or teacher whose proof is approved sees a notice on the home page and gets an email when mail is set up",
+      "Explanation for each quiz question is prepared with the question; shared links are watch-only; one name for the stronger answers: In-depth mode"
+    ]
+  },
+  {
     "v": "1.11",
     "at": "2026-11-09T09:30:00Z",
     "title": "Proof and payment viewer, early stop on unreadable files, mobile polish",
