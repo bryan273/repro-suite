@@ -113,7 +113,7 @@
     m.append(p, a);
     if (user.admin) {
       const ad = document.createElement('a');
-      ad.href = `${HOME}/console`;
+      ad.href = '/repro-suite/hub/console';
       ad.textContent = 'Admin';
       m.append(ad);
     }
