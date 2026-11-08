@@ -1,5 +1,22 @@
 [
   {
+    "v": "1.11",
+    "at": "2026-11-09T09:30:00Z",
+    "title": "Proof and payment viewer, early stop on unreadable files, mobile polish",
+    "notes": [
+      "Admin: View proof opens the student or teacher file as a picture, with Approve and Reject inside. Fixed: approving failed because the proof id was checked as a UUID",
+      "Fixed: the browser saved proof photos as broken files; they are real JPEGs now, and the broken ones already sent can still be viewed",
+      "Payment step: optional screenshot of the payment, shown to the admin when confirming the order",
+      "A garbled, scanned or protected file or link now stops at the first step with a clear message, before any script or video is made",
+      "Plus is 100 videos. Vietnam prices: Plus 89.000 VND and Pro 159.000 VND a month",
+      "One name for the stronger answers everywhere: In-depth mode (Chuyen sau). Pricing lines say plainly what is included",
+      "Interactive video: the explanation for each question is written together with the question, so Explain this more is instant",
+      "A shared video link is for watching: asking, quizzes and answers need a free account, unless the browser made the video",
+      "Phones: the quiz opens as a bottom sheet, lighter progress and parts list, round help button, bigger tap targets. Studio text follows the page language",
+      "Footer: copyright line in four languages"
+    ]
+  },
+  {
     "v": "1.10",
     "at": "2026-11-09T05:30:00Z",
     "title": "Email confirmation and reset, everything in four languages, study pack",
