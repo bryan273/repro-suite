@@ -1,36 +1,44 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" >
-    <link rel="icon" type="image/svg+xml" href="/repro-suite/indexboard/favicon.svg" >
-    <meta name="theme-color" content="#5b4bff" >
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-    <title data-mgx-overview="title">IndexBoard</title>
-    <meta data-mgx-overview="description" name="description" content="Intervals, ties and cost frontiers, shared with one link. / 带区间与并列说明的评测榜单，一个链接分享。" >
-    <meta name="author" content="Paperlit, Tsinghua SIGS AIID Group 1" >
-
-    <meta data-mgx-overview="og:title" property="og:title" content="IndexBoard: Publish evaluation results the way a careful reviewer would read them." >
-    <meta data-mgx-overview="og:description" property="og:description" content="Intervals, ties and cost frontiers, shared with one link. / 带区间与并列说明的评测榜单，一个链接分享。" >
-    <meta data-mgx-overview="og:image" property="og:image" content="https://bryan273.github.io/repro-suite/indexboard/og.png" >
-    <meta property="og:type" content="website" >
-    <meta name="twitter:card" content="summary_large_image" >
-
-    <meta data-mgx-overview="twitter:title" name="twitter:title" content="IndexBoard: Publish evaluation results the way a careful reviewer would read them." >
-    <meta data-mgx-overview="twitter:description" name="twitter:description" content="Intervals, ties and cost frontiers, shared with one link. / 带区间与并列说明的评测榜单，一个链接分享。" >
-    <meta data-mgx-overview="twitter:image" name="twitter:image" content="https://bryan273.github.io/repro-suite/indexboard/og.png" >
-    <script type="module" crossorigin src="/repro-suite/indexboard/assets/index-CEDLRn8c.js"></script>
-    <link rel="modulepreload" crossorigin href="/repro-suite/indexboard/assets/ui-vendor-CE-0eflD.js">
-    <link rel="modulepreload" crossorigin href="/repro-suite/indexboard/assets/utils-vendor-CJvhzDfu.js">
-    <link rel="modulepreload" crossorigin href="/repro-suite/indexboard/assets/query-vendor-_9RwS7zC.js">
-    <link rel="modulepreload" crossorigin href="/repro-suite/indexboard/assets/router-vendor-DfBl5yOy.js">
-    <link rel="modulepreload" crossorigin href="/repro-suite/indexboard/assets/index-DR75YgrL.js">
-    <link rel="stylesheet" crossorigin href="/repro-suite/indexboard/assets/index-C-GcFlfQ.css">
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  </head>
-
-  <body>
-    <script>try{var r=sessionStorage.getItem('spa-redirect');if(r){sessionStorage.removeItem('spa-redirect');history.replaceState(null,'',r)}}catch(e){}</script>
-    <div id="root"></div>
-    <script src="/repro-suite/indexboard/suite-account.js" defer></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Paperlit has moved</title>
+<link rel="icon" href="/paperlit/favicon.svg">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;font:16px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif;background:#f7f7fb;color:#12122a}main{max-width:420px;padding:32px;text-align:center}a{color:#4f3fe6;font-weight:600}</style>
+</head>
+<body>
+<main>
+<h1 style="font-size:24px;margin:0 0 8px">Paperlit has moved</h1>
+<p style="margin:0 0 16px;color:#555">This page is retired. You are being taken to the new site.</p>
+<p><a id="go" href="/paperlit/">Open Paperlit</a></p>
+</main>
+<noscript><meta http-equiv="refresh" content="0;url=/paperlit/"></noscript>
+<script>
+(function(){
+var N='/paperlit',p=location.pathname.replace(/^\/repro-suite\/?/,'').split('/').filter(Boolean),a=p[0]||'',r=p.slice(1),q=location.search,h=location.hash,to='/';
+var qs=new URLSearchParams(q);
+if(a==='explainer'){
+  if(r[0]==='abs'&&r[1])to='/app/new?url='+encodeURIComponent(r[1]),q='';
+  else if(r[0]==='account')to='/app/account';
+  else if(r[0]==='console')to='/app/admin';
+  else if(r[0]==='privacy'||r[0]==='terms')to='/'+r[0];
+  else if(!r.length&&qs.get('v')&&!qs.get('job'))to='/app/new?url='+encodeURIComponent(qs.get('v')),q='';
+  else if(!r.length)to='/';
+  else q='',h='';
+}else if(a==='hub'){
+  if(r[0]==='console')to='/app/admin';else if(r[0]==='privacy'||r[0]==='terms')to='/'+r[0];else to='/';
+  q='';h='';
+}else if(a==='reading'){
+  to=r[0]==='s'&&r[1]?'/app/read/s/'+encodeURIComponent(r[1]):'/app/read';q='';h='';
+}else if(a==='lite'||a==='repro'){to='/app/check';q='';h='';}
+else if(a==='desk'){to='/app';q='';h='';}
+else{to='/';q='';h='';}
+var u=N+to+(to.indexOf('?')>-1&&q?'&'+q.slice(1):q)+h;
+location.replace(u);
+document.getElementById('go').href=u;
+})();
+</script>
+</body>
 </html>
